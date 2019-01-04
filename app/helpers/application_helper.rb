@@ -11,6 +11,8 @@ module ApplicationHelper
   end
   
   def time_format(time)
-    format("%.2f", (((time.hour * 60) + time.min).to_d / 60.to_d))
+    # rails db:seedでseedデータを入れた場合、
+    # @user.base_attendance_time, @user.start_attendance_timeがnilになる=>未設定ですを返す
+    time.present? ? format("%.2f", (((time.hour * 60) + time.min).to_d / 60.to_d)) : "未設定です"
   end
 end
